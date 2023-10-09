@@ -1,0 +1,18 @@
+.progress-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  .progress-bar__bar {
+    padding: 0;
+
+    .MuiSlider-thumb {
+      display: none;
+    }
+  }
+
+  .progress-bar__current,
+  .progress-bar__total {
+    font-size: 0.75rem;
+  }
+}

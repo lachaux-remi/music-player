@@ -1,0 +1,28 @@
+.cover {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 200px;
+
+  .cover__image {
+    display: block;
+    border-radius: 4px;
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+  }
+
+  .cover__infos {
+    display: flex;
+    flex-direction: column;
+
+    .cover__infos__title {
+      font-size: 0.8rem;
+    }
+
+    .cover__infos__artist {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.75rem;
+    }
+  }
+}

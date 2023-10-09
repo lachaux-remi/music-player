@@ -1,0 +1,63 @@
+{
+  "name": "music-player",
+  "productName": "Lecteur de musique",
+  "description": "Lecteur de musique permettant de récupérer la musique en cours de lecture dans une page web, utile pour les lives sur Twitch.",
+  "version": "0.0.1",
+  "main": "dist-electron/main/index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build && electron-builder",
+    "preview": "vite preview",
+    "lint": "eslint ."
+  },
+  "author": {
+    "name": "LACHAUX Rémi",
+    "email": "contact@remi-lachaux.fr",
+    "url": "https://wwww.remi-lachaux.fr"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=19.5.0"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.14.9",
+    "@mui/material": "^5.14.9",
+    "@reduxjs/toolkit": "^1.9.5",
+    "md5": "^2.3.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.1.2",
+    "react-router-dom": "^6.16.0",
+    "redux": "^4.2.1",
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.4.2",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^4.2.0",
+    "@types/md5": "^2.3.2",
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "@types/uuid": "^9.0.4",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "@vitejs/plugin-react": "^4.0.3",
+    "electron": "^26.0.0",
+    "electron-builder": "^24.6.3",
+    "eslint": "^8.45.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.3",
+    "postcss": "^8.4.29",
+    "prettier": "^3.0.3",
+    "prettier-plugin-css-order": "^2.0.0",
+    "sass": "^1.67.0",
+    "typescript": "^5.0.2",
+    "vite": "^4.4.5",
+    "vite-plugin-electron": "^0.13.0-beta.3",
+    "vite-plugin-electron-renderer": "^0.14.5"
+  }
+}

@@ -1,0 +1,40 @@
+$titlebar-height: 50px;
+$sidebar-width: 50px;
+$player-height: 120px;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  user-select: none !important;
+}
+
+body #app {
+  --titlebar-height: #{$titlebar-height};
+  --sidebar-width: #{$sidebar-width};
+  --player-height: #{$player-height};
+
+  display: grid;
+  grid-template:
+    "sidebar titlebar" var(--titlebar-height)
+    "sidebar content" calc(100vh - var(--titlebar-height) - var(--player-height))
+    "player player" var(--player-height)
+    / var(--sidebar-width) 1fr;
+  overflow: hidden;
+
+  .titlebar {
+    grid-area: titlebar;
+  }
+
+  .sidebar {
+    grid-area: sidebar;
+  }
+
+  .main {
+    grid-area: content;
+  }
+
+  .music-player {
+    grid-area: player;
+  }
+}

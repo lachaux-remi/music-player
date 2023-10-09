@@ -1,0 +1,108 @@
+.page-music {
+  .main__content {
+    justify-content: space-between;
+
+    .mass-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      padding: 4px;
+
+      .mass-actions__checkbox {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .mass-actions__actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+    }
+
+    .tracks {
+      --border-radius: 6px;
+      --hover-color: rgba(255, 255, 255, 0.1);
+
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding: 16px;
+      overflow: hidden auto;
+
+      .tracks__track {
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        gap: 8px;
+        border-radius: var(--border-radius);
+        padding: 8px;
+        width: 216px;
+
+        &:hover,
+        &[data-selected="true"] {
+          cursor: pointer;
+          background: var(--hover-color);
+
+          .track__checkbox {
+            opacity: 1;
+          }
+        }
+
+        .track__checkbox {
+          position: absolute;
+          top: 16px;
+          left: 16px;
+          opacity: 0;
+          z-index: 1;
+        }
+
+        .track__cover {
+          display: flex;
+          position: relative;
+          flex-wrap: wrap;
+          justify-content: center;
+          align-items: center;
+          border: 2px solid var(--hover-color);
+          border-radius: var(--border-radius);
+
+          width: 200px;
+          height: 200px;
+          overflow: hidden;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+          }
+
+          svg {
+            opacity: 0.5;
+            width: 75%;
+            height: 75%;
+            pointer-events: none;
+          }
+        }
+
+        .track__infos {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          white-space: nowrap;
+
+          .infos__name {
+            overflow: hidden;
+            font-weight: bold;
+          }
+
+          .infos__artist {
+            font-size: 0.8rem;
+          }
+        }
+      }
+    }
+  }
+}
