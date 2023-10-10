@@ -24,12 +24,7 @@ import { RootState, Track } from "@/@types/State";
 import ResponsiveButton from "@/components/@extends/ResponsiveButton";
 import AddPlaylistDialog from "@/components/pages/playlists/components/AddPlaylistDialog";
 import { add, addTracks as addTracksToPlaylist } from "@/stores/slices/playlistsReducer";
-import {
-  addTracksToPlayNext,
-  addTracks as addTracksToQueue,
-  setCurrentTrack,
-  setTrack
-} from "@/stores/slices/queueReducer";
+import { addTracksToPlayNext, addTracks as addTracksToQueue, setTrack } from "@/stores/slices/queueReducer";
 import { remove } from "@/stores/slices/tracksReducer";
 
 type MassActionsProps = {
@@ -50,7 +45,7 @@ const MassActions = (props: MassActionsProps) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handelAddToNewPlaylist = (name: string) => {
+  const handleAddToNewPlaylist = (name: string) => {
     dispatch(add({ name, tracks: selectedTrack.map(track => track.uuid) }));
     setSelectedTrack([]);
   };
@@ -77,9 +72,7 @@ const MassActions = (props: MassActionsProps) => {
           size="small"
           startIcon={<PlayArrowRounded />}
           onClick={() => {
-            const fistTrack = selectedTrack[0];
-            dispatch(setTrack(fistTrack));
-            dispatch(setCurrentTrack(fistTrack));
+            dispatch(setTrack(selectedTrack[0]));
             dispatch(addTracksToQueue(selectedTrack.slice(1)));
             setSelectedTrack([]);
           }}
@@ -174,7 +167,7 @@ const MassActions = (props: MassActionsProps) => {
       <AddPlaylistDialog
         open={openAddPlaylist}
         onClose={() => setOpenAddPlaylist(false)}
-        onConfirm={handelAddToNewPlaylist}
+        onConfirm={handleAddToNewPlaylist}
       />
     </Paper>
   );

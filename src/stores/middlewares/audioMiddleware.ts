@@ -19,6 +19,7 @@ const audioMiddleware: Middleware = store => next => async action => {
       }
       break;
     }
+    case "queue/setTrack":
     case "queue/setCurrentTrack": {
       if (action.payload !== null) {
         audio.src = action.payload.path;
@@ -35,6 +36,10 @@ const audioMiddleware: Middleware = store => next => async action => {
     }
     case "playing/play": {
       await audio.play();
+      break;
+    }
+    case "playing/pause": {
+      audio.pause();
       break;
     }
     case "playing/playOrPause": {

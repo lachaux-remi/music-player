@@ -14,12 +14,7 @@ import { RootState, Track } from "@/@types/State";
 import AddPlaylistDialog from "@/components/pages/playlists/components/AddPlaylistDialog";
 import { useContextMenu } from "@/hooks/useContextMenu";
 import { add, addTracks as addTracksToPlaylist } from "@/stores/slices/playlistsReducer";
-import {
-  addTracksToPlayNext,
-  addTracks as addTracksToQueue,
-  setCurrentTrack,
-  setTrack
-} from "@/stores/slices/queueReducer";
+import { addTracksToPlayNext, addTracks as addTracksToQueue, setTrack } from "@/stores/slices/queueReducer";
 import { remove } from "@/stores/slices/tracksReducer";
 
 type TrackInfoProps = {
@@ -38,7 +33,6 @@ const TrackInfo = (props: TrackInfoProps) => {
       caption: "Lire",
       icon: <PlayArrowRounded />,
       onClick: () => {
-        dispatch(setCurrentTrack(track));
         dispatch(setTrack(track));
       }
     },
@@ -87,7 +81,7 @@ const TrackInfo = (props: TrackInfoProps) => {
     }
   ]);
 
-  const handelAddToNewPlaylist = (name: string) => {
+  const handleAddToNewPlaylist = (name: string) => {
     dispatch(add({ name, tracks: [track.uuid] }));
   };
 
@@ -101,7 +95,6 @@ const TrackInfo = (props: TrackInfoProps) => {
   };
 
   const handleDoubleClick = () => {
-    dispatch(setCurrentTrack(track));
     dispatch(setTrack(track));
   };
 
@@ -130,7 +123,7 @@ const TrackInfo = (props: TrackInfoProps) => {
       <AddPlaylistDialog
         open={openAddPlaylist}
         onClose={() => setOpenAddPlaylist(false)}
-        onConfirm={handelAddToNewPlaylist}
+        onConfirm={handleAddToNewPlaylist}
       />
     </ButtonBase>
   );

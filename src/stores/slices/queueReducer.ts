@@ -17,6 +17,7 @@ export const queueSlice = createSlice({
       state.currentTrack = action.payload;
     },
     setTrack: (state: QueueState, action: PayloadAction<Track>) => {
+      state.currentTrack = action.payload;
       state.tracks = [action.payload];
     },
     addTracks: (state: QueueState, action: PayloadAction<Track[]>) => {
