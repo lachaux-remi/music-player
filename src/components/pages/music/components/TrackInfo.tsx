@@ -7,7 +7,7 @@ import {
   QueueMusicRounded
 } from "@mui/icons-material";
 import { ButtonBase, Checkbox } from "@mui/material";
-import React, { ChangeEvent, MouseEvent, MouseEventHandler, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { RootState, Track } from "@/@types/State";
@@ -100,10 +100,7 @@ const TrackInfo = (props: TrackInfoProps) => {
     }
   };
 
-  const handleDoubleClick = (event: MouseEvent) => {
-    console.log(event);
-
-    event.stopPropagation();
+  const handleDoubleClick = () => {
     dispatch(setCurrentTrack(track));
     dispatch(setTrack(track));
   };
