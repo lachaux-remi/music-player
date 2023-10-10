@@ -1,15 +1,18 @@
+import { ipcRenderer } from "electron";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { RepeatMode, RootState } from "@/@types/State";
+import { PlayerActionType } from "@/@types/MusicPlayer";
+import { MediaState, RepeatMode, RootState } from "@/@types/State";
 import { audio } from "@/stores/middlewares/audioMiddleware";
-import { play, stop } from "@/stores/slices/playingReducer";
-import { setCurrentTime, setCurrentTrack } from "@/stores/slices/queueReducer";
+import { play, playOrPause, stop } from "@/stores/slices/playingReducer";
+import { nextTrack, previousTrack, setCurrentTime, setCurrentTrack } from "@/stores/slices/queueReducer";
 
 const AudioManager = () => {
   const dispatch = useDispatch();
   const { currentTime, currentTrack, tracks } = useSelector((state: RootState) => state.queue);
   const { volume, repeat } = useSelector((state: RootState) => state.settings);
+  const status = useSelector((state: RootState) => state.playing);
 
   useEffect(() => {
     audio.src = currentTrack?.path || "";
@@ -18,6 +21,24 @@ const AudioManager = () => {
     audio.muted = volume.muted;
     audio.ontimeupdate = () => {
       dispatch(setCurrentTime({ currentTime: Math.trunc(audio.currentTime) }));
+    };
+
+    ipcRenderer.on("media", (_, action: PlayerActionType) => {
+      switch (action) {
+        case "play-pause":
+          dispatch(playOrPause());
+          break;
+        case "previous":
+          dispatch(previousTrack());
+          break;
+        case "next":
+          dispatch(nextTrack());
+          break;
+      }
+    });
+
+    return () => {
+      ipcRenderer.removeAllListeners("media");
     };
   }, []);
 
@@ -41,6 +62,14 @@ const AudioManager = () => {
       }
     };
   }, [repeat, tracks, currentTrack]);
+
+  useEffect(() => {
+    if (status === MediaState.PLAYING) {
+      ipcRenderer.send("playing-status", "play");
+    } else {
+      ipcRenderer.send("playing-status", "pause");
+    }
+  }, [status]);
 
   return null;
 };
