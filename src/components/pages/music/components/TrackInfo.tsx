@@ -100,12 +100,18 @@ const TrackInfo = (props: TrackInfoProps) => {
     }
   };
 
+  const handleDoubleClick = () => {
+    dispatch(setCurrentTrack(track));
+    dispatch(setTrack(track));
+  };
+
   return (
     <ButtonBase
       component="div"
       className="tracks__track"
       disableRipple={true}
       onContextMenu={onContextMenu}
+      onDoubleClick={handleDoubleClick}
       data-selected={isSelected}
     >
       <div className="track__checkbox">
