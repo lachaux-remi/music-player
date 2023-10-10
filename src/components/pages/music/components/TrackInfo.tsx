@@ -115,7 +115,7 @@ const TrackInfo = (props: TrackInfoProps) => {
       data-selected={isSelected}
     >
       <div className="track__checkbox">
-        <Checkbox onChange={handleSelectTrack} checked={isSelected} />
+        <Checkbox onDoubleClick={e => e.stopPropagation()} onChange={handleSelectTrack} checked={isSelected} />
       </div>
       <div className="track__cover">
         {track.cover !== "" ? <img src={track.cover} alt={track.title} /> : <MusicNoteRounded />}
