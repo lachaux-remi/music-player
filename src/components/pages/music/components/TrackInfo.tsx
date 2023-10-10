@@ -7,7 +7,7 @@ import {
   QueueMusicRounded
 } from "@mui/icons-material";
 import { ButtonBase, Checkbox } from "@mui/material";
-import React, { useState } from "react";
+import React, { ChangeEvent, MouseEvent, MouseEventHandler, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { RootState, Track } from "@/@types/State";
@@ -100,7 +100,10 @@ const TrackInfo = (props: TrackInfoProps) => {
     }
   };
 
-  const handleDoubleClick = () => {
+  const handleDoubleClick = (event: MouseEvent) => {
+    console.log(event);
+
+    event.stopPropagation();
     dispatch(setCurrentTrack(track));
     dispatch(setTrack(track));
   };
@@ -115,7 +118,7 @@ const TrackInfo = (props: TrackInfoProps) => {
       data-selected={isSelected}
     >
       <div className="track__checkbox">
-        <Checkbox onChange={handleSelectTrack} checked={isSelected} />
+        <Checkbox onDoubleClick={e => e.stopPropagation()} onChange={handleSelectTrack} checked={isSelected} />
       </div>
       <div className="track__cover">
         {track.cover !== "" ? <img src={track.cover} alt={track.title} /> : <MusicNoteRounded />}
