@@ -55,7 +55,7 @@ const MusicPage = () => {
       const track = {
         uuid,
         path: file.path,
-        title: tags.title || "Sans titre",
+        title: tags.title || file.name || "Sans titre",
         artist: tags.artist || "Inconnu",
         album: tags.album || "Inconnu",
         cover,
