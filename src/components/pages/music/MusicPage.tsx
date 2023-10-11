@@ -1,4 +1,11 @@
-import { CreateNewFolderRounded } from "@mui/icons-material";
+import {
+  AddRounded,
+  AddToQueueRounded,
+  ClearRounded,
+  CreateNewFolderRounded,
+  PlayArrowRounded,
+  QueueMusicRounded
+} from "@mui/icons-material";
 import md5 from "md5";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,18 +14,90 @@ import { PageAction } from "@/@types/Page";
 import { RootState, Track } from "@/@types/State";
 import Page from "@/components/pages/Page";
 import Action from "@/components/pages/components/page-actions/Action";
-import MassActions from "@/components/pages/music/components/MassActions";
 import TrackInfo from "@/components/pages/music/components/TrackInfo";
+import AddPlaylistDialog from "@/components/pages/playlists/components/AddPlaylistDialog";
+import { useMassSelection } from "@/hooks/useMassSelection";
 import MediaInfo from "@/libs/media-info/MediaInfo";
-import { add } from "@/stores/slices/tracksReducer";
+import { add as addNewPlaylist, addTracks as addTracksToPlaylist } from "@/stores/slices/playlistsReducer";
+import { addTracks as addTracksToQueue, setTrack } from "@/stores/slices/queueReducer";
+import { add, remove as removeTracks } from "@/stores/slices/tracksReducer";
 
 import "./MusicPage.scss";
 
 const MusicPage = () => {
   const dispatch = useDispatch();
+  const playlists = useSelector((state: RootState) => state.playlists);
   const tracks = useSelector((state: RootState) => state.tracks);
   const onlyType = ["audio/mpeg", "audio/mp3", "audio/wav", "audio/ogg", "audio/flac"];
-  const selectedState = useState<Track[]>([]);
+  const [openAddPlaylist, setOpenAddPlaylist] = useState(false);
+  const { selectedItems, setSelectedItem, renderMassActions } = useMassSelection<Track>(tracks, [
+    {
+      caption: "Lire",
+      icon: <PlayArrowRounded />,
+      variant: "contained",
+      onClick: () => {
+        dispatch(setTrack(selectedItems[0]));
+        if (selectedItems.length > 1) {
+          dispatch(addTracksToQueue(selectedItems.slice(1)));
+        }
+        setSelectedItem([]);
+      }
+    },
+    {
+      caption: "Lire ensuite",
+      icon: <AddToQueueRounded />,
+      onClick: () => {
+        dispatch(addTracksToQueue(selectedItems));
+        setSelectedItem([]);
+      }
+    },
+    {
+      caption: "Ajouter à",
+      icon: <AddRounded />,
+      items: [
+        {
+          caption: "File d'attente de lecture",
+          icon: <QueueMusicRounded />,
+          onClick: () => {
+            dispatch(addTracksToQueue(selectedItems));
+            setSelectedItem([]);
+          }
+        },
+        { caption: "divider" },
+        {
+          caption: "Nouvelle playlist",
+          icon: <AddRounded />,
+          onClick: () => {
+            setOpenAddPlaylist(true);
+          }
+        },
+        ...playlists.map(playlist => {
+          return {
+            caption: playlist.name,
+            icon: <AddRounded />,
+            onClick: () => {
+              dispatch(
+                addTracksToPlaylist({
+                  uuid: playlist.uuid,
+                  tracks: selectedItems.map(track => track.uuid)
+                })
+              );
+              setSelectedItem([]);
+            }
+          };
+        })
+      ]
+    },
+    {
+      caption: "Supprimer",
+      icon: <ClearRounded />,
+      color: "error",
+      onClick: () => {
+        dispatch(removeTracks(selectedItems));
+        setSelectedItem([]);
+      }
+    }
+  ]);
 
   const handleOpenFilesSelector = () => {
     const input = document.createElement("input");
@@ -65,6 +144,11 @@ const MusicPage = () => {
     }
   };
 
+  const handleAddToNewPlaylist = (name: string) => {
+    dispatch(addNewPlaylist({ name, tracks: selectedItems.map(track => track.uuid) }));
+    setSelectedItem([]);
+  };
+
   const actions: PageAction[] = [
     <Action onClick={handleOpenFilesSelector} icon={<CreateNewFolderRounded />} key="home-add-folder">
       Ajouter un dossier
@@ -75,10 +159,17 @@ const MusicPage = () => {
     <Page title="Musique" className="page-music" actions={actions}>
       <div className="tracks">
         {tracks.map(track => (
-          <TrackInfo {...track} key={track.uuid} selectedState={selectedState} />
+          <TrackInfo key={track.uuid} track={track} selectedState={[selectedItems, setSelectedItem]} />
         ))}
       </div>
-      <MassActions tracks={tracks} state={selectedState} />
+
+      {renderMassActions}
+
+      <AddPlaylistDialog
+        open={openAddPlaylist}
+        onClose={() => setOpenAddPlaylist(false)}
+        onConfirm={handleAddToNewPlaylist}
+      />
     </Page>
   );
 };

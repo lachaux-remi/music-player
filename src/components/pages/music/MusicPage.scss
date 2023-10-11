@@ -2,26 +2,6 @@
   .main__content {
     justify-content: space-between;
 
-    .mass-actions {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 8px;
-      padding: 4px;
-
-      .mass-actions__checkbox {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-
-      .mass-actions__actions {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-    }
-
     .tracks {
       --border-radius: 6px;
       --hover-color: rgba(255, 255, 255, 0.1);

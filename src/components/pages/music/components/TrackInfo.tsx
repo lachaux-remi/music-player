@@ -18,11 +18,12 @@ import { addTracksToPlayNext, addTracks as addTracksToQueue, setTrack } from "@/
 import { remove } from "@/stores/slices/tracksReducer";
 
 type TrackInfoProps = {
+  track: Track;
   selectedState: [Track[], React.Dispatch<React.SetStateAction<Track[]>>];
-} & Track;
+};
 
 const TrackInfo = (props: TrackInfoProps) => {
-  const { selectedState, ...track } = props;
+  const { selectedState, track } = props;
   const [selectedTrack, setSelectedTrack] = selectedState;
 
   const dispatch = useDispatch();

@@ -1,0 +1,19 @@
+.mass-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 4px;
+
+  .mass-actions__checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .mass-actions__actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}

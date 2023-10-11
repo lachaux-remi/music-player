@@ -1,8 +1,8 @@
 import { Button, ButtonProps, IconButton, Tooltip, useMediaQuery, useTheme } from "@mui/material";
 
-type ResponsiveButtonProps = ButtonProps;
+export type ResponsiveButtonProps = ButtonProps;
 
-const ResponsiveButton = (props: ResponsiveButtonProps) => {
+export const ResponsiveButton = (props: ResponsiveButtonProps) => {
   const { children, ...buttonProps } = props;
 
   const theme = useTheme();
