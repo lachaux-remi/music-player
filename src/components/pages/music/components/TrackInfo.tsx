@@ -7,12 +7,12 @@ import {
   QueueMusicRounded
 } from "@mui/icons-material";
 import { ButtonBase, Checkbox } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { RootState, Track } from "@/@types/State";
-import AddPlaylistDialog from "@/components/pages/playlists/components/AddPlaylistDialog";
 import { useContextMenu } from "@/hooks/useContextMenu";
+import { usePlaylistNameDialog } from "@/hooks/usePlaylistNameDialog";
 import { add, addTracks as addTracksToPlaylist } from "@/stores/slices/playlistsReducer";
 import { addTracksToPlayNext, addTracks as addTracksToQueue, setTrack } from "@/stores/slices/queueReducer";
 import { remove } from "@/stores/slices/tracksReducer";
@@ -27,8 +27,11 @@ const TrackInfo = (props: TrackInfoProps) => {
   const [selectedTrack, setSelectedTrack] = selectedState;
 
   const dispatch = useDispatch();
+  const { renderDialog, setOpen } = usePlaylistNameDialog({
+    title: "Ajouter une nouvelle playlist",
+    onConfirm: (name: string) => dispatch(add({ name, tracks: [track.uuid] }))
+  });
   const playlists = useSelector((state: RootState) => state.playlists);
-  const [openAddPlaylist, setOpenAddPlaylist] = useState(false);
   const { contextMenu, onContextMenu } = useContextMenu([
     {
       caption: "Lire",
@@ -64,7 +67,7 @@ const TrackInfo = (props: TrackInfoProps) => {
         {
           caption: "Nouvelle playlist",
           icon: <AddRounded />,
-          onClick: () => setOpenAddPlaylist(true)
+          onClick: () => setOpen(true)
         },
         ...playlists.map(playlist => {
           return {
@@ -81,10 +84,6 @@ const TrackInfo = (props: TrackInfoProps) => {
       onClick: () => dispatch(remove([track]))
     }
   ]);
-
-  const handleAddToNewPlaylist = (name: string) => {
-    dispatch(add({ name, tracks: [track.uuid] }));
-  };
 
   const isSelected = selectedTrack.find(t => t.uuid === track.uuid) !== undefined;
   const handleSelectTrack = () => {
@@ -120,12 +119,7 @@ const TrackInfo = (props: TrackInfoProps) => {
       </div>
 
       {contextMenu}
-
-      <AddPlaylistDialog
-        open={openAddPlaylist}
-        onClose={() => setOpenAddPlaylist(false)}
-        onConfirm={handleAddToNewPlaylist}
-      />
+      {renderDialog}
     </ButtonBase>
   );
 };

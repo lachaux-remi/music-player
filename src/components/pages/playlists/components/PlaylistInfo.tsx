@@ -7,13 +7,13 @@ import {
   SubscriptionsRounded
 } from "@mui/icons-material";
 import { ButtonBase } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
-import RenamePlaylistDialog from "@/components/pages/playlists/components/RenamePlaylistDialog";
 import { useContextMenu } from "@/hooks/useContextMenu";
 import usePlaylist from "@/hooks/usePlaylist";
+import { usePlaylistNameDialog } from "@/hooks/usePlaylistNameDialog";
 import { remove, rename } from "@/stores/slices/playlistsReducer";
 
 type PlaylistInfoProps = {
@@ -26,7 +26,13 @@ const PlaylistInfo = (props: PlaylistInfoProps) => {
   const dispatch = useDispatch();
   const { getPlaylist } = usePlaylist();
   const playlist = getPlaylist(playlistUUID)!;
-  const [openRenamePlaylist, setOpenRenamePlaylist] = useState(false);
+
+  const { renderDialog, setOpen } = usePlaylistNameDialog({
+    title: "Renommer la playlist",
+    value: playlist.name,
+    onConfirm: (newName: string) => dispatch(rename({ uuid: playlist.uuid, newName }))
+  });
+
   const { contextMenu, onContextMenu } = useContextMenu([
     {
       caption: "Lire",
@@ -44,7 +50,7 @@ const PlaylistInfo = (props: PlaylistInfoProps) => {
     {
       caption: "Renommer",
       icon: <EditRounded />,
-      onClick: () => setOpenRenamePlaylist(true)
+      onClick: () => setOpen(true)
     },
     {
       caption: "Supprimer",
@@ -52,10 +58,6 @@ const PlaylistInfo = (props: PlaylistInfoProps) => {
       onClick: () => dispatch(remove(playlistUUID))
     }
   ]);
-
-  const handelRRenamePlaylist = (newName: string) => {
-    dispatch(rename({ uuid: playlistUUID, newName }));
-  };
 
   return (
     <ButtonBase
@@ -88,13 +90,7 @@ const PlaylistInfo = (props: PlaylistInfoProps) => {
       </div>
 
       {contextMenu}
-
-      <RenamePlaylistDialog
-        open={openRenamePlaylist}
-        onClose={() => setOpenRenamePlaylist(false)}
-        onConfirm={handelRRenamePlaylist}
-        currentName={playlist.name}
-      />
+      {renderDialog}
     </ButtonBase>
   );
 };

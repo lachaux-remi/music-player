@@ -1,5 +1,5 @@
 import { AddToQueueRounded, ClearRounded, EditRounded, PlayArrowRounded } from "@mui/icons-material";
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -9,9 +9,9 @@ import Page from "@/components/pages/Page";
 import Action from "@/components/pages/components/page-actions/Action";
 import NotFoundPage from "@/components/pages/errors/NotFoundPage";
 import TrackDetails from "@/components/pages/playlist-details/components/TrackDetails";
-import RenamePlaylistDialog from "@/components/pages/playlists/components/RenamePlaylistDialog";
 import { useMassSelection } from "@/hooks/useMassSelection";
 import usePlaylist from "@/hooks/usePlaylist";
+import { usePlaylistNameDialog } from "@/hooks/usePlaylistNameDialog";
 import { remove as removePlaylist, rename } from "@/stores/slices/playlistsReducer";
 import { addTracks as addTracksToQueue, setTrack } from "@/stores/slices/queueReducer";
 import { remove as removeTracks } from "@/stores/slices/tracksReducer";
@@ -23,12 +23,17 @@ const PlaylistDetailsPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { getPlaylist } = usePlaylist();
-  const [openRenamePlaylist, setOpenRenamePlaylist] = useState(false);
 
   const playlist = getPlaylist(playlistUUID!);
   if (playlist === undefined) {
     return <NotFoundPage>Playlist introuvable ou supprimé</NotFoundPage>;
   }
+
+  const { renderDialog, setOpen } = usePlaylistNameDialog({
+    title: "Renommer la playlist",
+    value: playlist.name,
+    onConfirm: (newName: string) => dispatch(rename({ uuid: playlist.uuid, newName }))
+  });
 
   const { selectedItems, setSelectedItem, renderMassActions } = useMassSelection<Track>(playlist.tracks, [
     {
@@ -62,10 +67,6 @@ const PlaylistDetailsPage = () => {
     }
   ]);
 
-  const handleRenamePlaylist = (newName: string) => {
-    dispatch(rename({ uuid: playlist.uuid, newName }));
-  };
-
   const handlePlayPlaylist = () => {
     dispatch(setTrack(playlist.tracks[0]));
     dispatch(addTracksToQueue(playlist.tracks.slice(1)));
@@ -80,7 +81,7 @@ const PlaylistDetailsPage = () => {
     <Action key="playlist-play" variant="contained" icon={<PlayArrowRounded />} onClick={handlePlayPlaylist}>
       Tout lire
     </Action>,
-    <Action key="playlist-rename" icon={<EditRounded />} onClick={() => setOpenRenamePlaylist(true)}>
+    <Action key="playlist-rename" icon={<EditRounded />} onClick={() => setOpen(true)}>
       Renommer
     </Action>,
     <Action key="playlist-remove" color="error" icon={<ClearRounded />} onClick={handleRemovePlaylist}>
@@ -97,13 +98,7 @@ const PlaylistDetailsPage = () => {
       </div>
 
       {renderMassActions}
-
-      <RenamePlaylistDialog
-        open={openRenamePlaylist}
-        onClose={() => setOpenRenamePlaylist(false)}
-        onConfirm={handleRenamePlaylist}
-        currentName={playlist.name}
-      />
+      {renderDialog}
     </Page>
   );
 };
