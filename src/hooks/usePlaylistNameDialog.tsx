@@ -1,6 +1,6 @@
 import { LibraryMusic } from "@mui/icons-material";
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from "@mui/material";
-import React, { useRef, useState } from "react";
+import React, { MouseEvent, useRef, useState } from "react";
 
 export type UsePlaylistDialogProps = {
   title: string;
@@ -15,7 +15,10 @@ export const usePlaylistNameDialog = (props: UsePlaylistDialogProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [open, setOpen] = useState(false);
 
-  const handleClose = () => {
+  const handleClose = (event: MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+
     setOpen(false);
 
     if (onClose) {
@@ -23,7 +26,10 @@ export const usePlaylistNameDialog = (props: UsePlaylistDialogProps) => {
     }
   };
 
-  const handledConfirm = () => {
+  const handledConfirm = (event: MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+
     setOpen(false);
 
     if (inputRef.current?.value) {

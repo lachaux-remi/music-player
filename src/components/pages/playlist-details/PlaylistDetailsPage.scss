@@ -1,43 +1,80 @@
 .page-playlist-details {
-  .playlist-details {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding: 16px;
+  .main__content {
+    justify-content: space-between;
 
-    .playlist__track-details {
+    .playlist-details {
+      --border-radius: 6px;
+      --hover-color: rgba(255, 255, 255, 0.1);
+
       display: flex;
-      border-radius: 6px;
-      padding: 8px 16px;
+      flex-direction: column;
+      gap: 8px;
+      padding: 16px;
+      overflow: hidden auto;
 
-      &:nth-child(odd) {
-        background-color: rgba(255, 255, 255, 0.1);
-
-        &:hover {
-          background-color: rgba(255, 255, 255, 0.2);
-        }
-      }
-
-      &:hover {
-        background-color: rgba(255, 255, 255, 0.1);
-      }
-
-      .track-details__title {
-        flex: 2;
-      }
-
-      .track-details__artist {
-        flex: 1;
-      }
-
-      .track-details__album {
-        flex: 1;
-      }
-
-      .track-details__duration {
+      .playlist__track-details {
         display: flex;
-        justify-content: flex-end;
-        width: 64px;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        border-radius: 6px;
+        background-color: var(--background-color);
+        padding: 4px 16px;
+
+        &:nth-child(odd) {
+          --background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        &:hover,
+        &[data-selected="true"] {
+          --background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .track-details__cover {
+          display: flex;
+          position: relative;
+          flex-wrap: wrap;
+          justify-content: center;
+          align-items: center;
+          border: 2px solid var(--hover-color);
+          border-radius: var(--border-radius);
+
+          width: 38px;
+          height: 38px;
+          overflow: hidden;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+          }
+
+          svg {
+            opacity: 0.5;
+            width: 75%;
+            height: 75%;
+            pointer-events: none;
+          }
+        }
+
+        .track-details__title {
+          flex: 2;
+        }
+
+        .track-details__artist {
+          flex: 1;
+        }
+
+        .track-details__album {
+          flex: 1;
+        }
+
+        .track-details__duration {
+          display: flex;
+          justify-content: flex-end;
+          width: 64px;
+        }
       }
     }
   }

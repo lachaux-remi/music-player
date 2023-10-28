@@ -17,13 +17,13 @@
         position: relative;
         flex-direction: column;
         gap: 8px;
+        cursor: pointer;
         border-radius: var(--border-radius);
         padding: 8px;
         width: 216px;
 
         &:hover,
         &[data-selected="true"] {
-          cursor: pointer;
           background: var(--hover-color);
 
           .track__checkbox {
@@ -47,7 +47,6 @@
           align-items: center;
           border: 2px solid var(--hover-color);
           border-radius: var(--border-radius);
-
           width: 200px;
           height: 200px;
           overflow: hidden;
