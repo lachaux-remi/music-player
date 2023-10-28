@@ -1,13 +1,13 @@
 import { AddRounded } from "@mui/icons-material";
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { PageAction } from "@/@types/Page";
 import { RootState } from "@/@types/State";
 import Page from "@/components/pages/Page";
 import Action from "@/components/pages/components/page-actions/Action";
-import AddPlaylistDialog from "@/components/pages/playlists/components/AddPlaylistDialog";
 import PlaylistInfo from "@/components/pages/playlists/components/PlaylistInfo";
+import { usePlaylistNameDialog } from "@/hooks/usePlaylistNameDialog";
 import { add } from "@/stores/slices/playlistsReducer";
 
 import "./PlaylistsPage.scss";
@@ -15,18 +15,17 @@ import "./PlaylistsPage.scss";
 const PlaylistsPage = () => {
   const dispatch = useDispatch();
 
+  const { renderDialog, setOpen } = usePlaylistNameDialog({
+    title: "Ajouter une nouvelle playlist",
+    onConfirm: (name: string) => dispatch(add({ name }))
+  });
   const playlists = useSelector((state: RootState) => state.playlists);
-  const [openAddPlaylist, setOpenAddPlaylist] = useState(false);
 
   const actions: PageAction[] = [
-    <Action key="playlist-add" icon={<AddRounded />} onClick={() => setOpenAddPlaylist(true)}>
+    <Action key="playlist-add" icon={<AddRounded />} onClick={() => setOpen(true)}>
       Nouvelle playlist
     </Action>
   ];
-
-  const handleAddPlaylist = (name: string) => {
-    dispatch(add({ name }));
-  };
 
   return (
     <Page title="Playlists" className="page-playlists" actions={actions}>
@@ -36,11 +35,7 @@ const PlaylistsPage = () => {
         ))}
       </div>
 
-      <AddPlaylistDialog
-        open={openAddPlaylist}
-        onClose={() => setOpenAddPlaylist(false)}
-        onConfirm={handleAddPlaylist}
-      />
+      {renderDialog}
     </Page>
   );
 };

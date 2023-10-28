@@ -1,0 +1,44 @@
+.page-playlist-details {
+  .playlist-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px;
+
+    .playlist__track-details {
+      display: flex;
+      border-radius: 6px;
+      padding: 8px 16px;
+
+      &:nth-child(odd) {
+        background-color: rgba(255, 255, 255, 0.1);
+
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.2);
+        }
+      }
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      .track-details__title {
+        flex: 2;
+      }
+
+      .track-details__artist {
+        flex: 1;
+      }
+
+      .track-details__album {
+        flex: 1;
+      }
+
+      .track-details__duration {
+        display: flex;
+        justify-content: flex-end;
+        width: 64px;
+      }
+    }
+  }
+}
