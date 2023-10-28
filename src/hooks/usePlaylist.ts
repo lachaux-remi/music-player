@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 
 import { RootState, Track } from "@/@types/State";
 
-type Playlist = {
+export type Playlist = {
   uuid: string;
   name: string;
   tracks: Track[];

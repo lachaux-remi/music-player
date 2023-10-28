@@ -62,10 +62,10 @@ const PlaylistInfo = (props: PlaylistInfoProps) => {
   return (
     <ButtonBase
       component={Link}
-      to={`/playlists/${playlistUUID}`}
-      disableRipple={true}
       className="playlists__playlist"
+      disableRipple={true}
       onContextMenu={onContextMenu}
+      to={playlist.tracks.length === 0 ? "#" : `/playlists/${playlistUUID}`}
     >
       <div className="playlist__covers">
         {playlist.tracks.length === 0 && (

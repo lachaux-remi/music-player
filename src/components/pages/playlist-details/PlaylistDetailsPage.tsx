@@ -12,9 +12,8 @@ import TrackDetails from "@/components/pages/playlist-details/components/TrackDe
 import { useMassSelection } from "@/hooks/useMassSelection";
 import usePlaylist from "@/hooks/usePlaylist";
 import { usePlaylistNameDialog } from "@/hooks/usePlaylistNameDialog";
-import { remove as removePlaylist, rename } from "@/stores/slices/playlistsReducer";
+import { remove as removePlaylist, removeTracks, rename } from "@/stores/slices/playlistsReducer";
 import { addTracks as addTracksToQueue, setTrack } from "@/stores/slices/queueReducer";
-import { remove as removeTracks } from "@/stores/slices/tracksReducer";
 
 import "./PlaylistDetailsPage.scss";
 
@@ -61,7 +60,7 @@ const PlaylistDetailsPage = () => {
       icon: <ClearRounded />,
       color: "error",
       onClick: () => {
-        dispatch(removeTracks(selectedItems));
+        dispatch(removeTracks({ uuid: playlist.uuid, tracks: selectedItems.map(t => t.uuid) }));
         setSelectedItem([]);
       }
     }
@@ -93,7 +92,12 @@ const PlaylistDetailsPage = () => {
     <Page title={`Playlist · ${playlist.name}`} actions={actions} className="page-playlist-details">
       <div className="playlist-details">
         {playlist.tracks.map(track => (
-          <TrackDetails key={track.uuid} track={track} selectedState={[selectedItems, setSelectedItem]} />
+          <TrackDetails
+            key={track.uuid}
+            playlist={playlist}
+            track={track}
+            selectedState={[selectedItems, setSelectedItem]}
+          />
         ))}
       </div>
 
