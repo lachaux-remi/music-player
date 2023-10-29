@@ -4,15 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { PageAction } from "@/@types/Page";
 import { RootState } from "@/@types/State";
-import Page from "@/components/pages/Page";
-import Action from "@/components/pages/components/page-actions/Action";
-import PlaylistInfo from "@/components/pages/playlists/components/PlaylistInfo";
+import { Page } from "@/components/pages/Page";
+import { Action } from "@/components/pages/components/page-actions/Action";
+import { PlaylistInfo } from "@/components/pages/playlists/components/PlaylistInfo";
 import { usePlaylistNameDialog } from "@/hooks/usePlaylistNameDialog";
 import { add } from "@/stores/slices/playlistsReducer";
 
 import "./PlaylistsPage.scss";
 
-const PlaylistsPage = () => {
+export const PlaylistsPage = () => {
   const dispatch = useDispatch();
 
   const { renderDialog, setOpen } = usePlaylistNameDialog({
@@ -39,5 +39,3 @@ const PlaylistsPage = () => {
     </Page>
   );
 };
-
-export default PlaylistsPage;

@@ -5,9 +5,7 @@ export type ContextMenuContextType = {
   registerMenuItems: (menuItem: HTMLDivElement) => void;
 };
 
-const ContextMenuContext = createContext<ContextMenuContextType>({
+export const ContextMenuContext = createContext<ContextMenuContextType>({
   registerMenu: () => {},
   registerMenuItems: () => {}
 });
-
-export default ContextMenuContext;

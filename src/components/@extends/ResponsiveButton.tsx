@@ -19,5 +19,3 @@ export const ResponsiveButton = (props: ResponsiveButtonProps) => {
   }
   return <Button {...buttonProps}>{children}</Button>;
 };
-
-export default ResponsiveButton;

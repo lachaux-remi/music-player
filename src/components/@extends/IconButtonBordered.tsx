@@ -2,12 +2,12 @@ import { IconButton } from "@mui/material";
 import { IconButtonProps } from "@mui/material/IconButton/IconButton";
 import { styled } from "@mui/material/styles";
 
-type IconButtonBorderedProps = {
+export type IconButtonBorderedProps = {
   borderSize?: number;
   borderColor?: string;
 } & IconButtonProps;
 
-const IconButtonBordered = (prop: IconButtonBorderedProps) => {
+export const IconButtonBordered = (prop: IconButtonBorderedProps) => {
   const { children, borderSize = 2, borderColor, ...iconButtonProp } = prop;
 
   const ButtonBackground = styled(IconButton)(({ theme }) => {
@@ -18,5 +18,3 @@ const IconButtonBordered = (prop: IconButtonBorderedProps) => {
 
   return <ButtonBackground {...iconButtonProp}>{children}</ButtonBackground>;
 };
-
-export default IconButtonBordered;

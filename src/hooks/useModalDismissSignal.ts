@@ -1,6 +1,6 @@
 import { MutableRefObject, RefObject, useEffect } from "react";
 
-const useModalDismissSignal = (
+export const useModalDismissSignal = (
   modalRef: MutableRefObject<HTMLDivElement> | RefObject<HTMLDivElement>,
   dismissCallback: () => void,
   dismissOnClickOutside: boolean = true
@@ -63,5 +63,3 @@ const useModalDismissSignal = (
     };
   }, [modalRef, dismissCallback, dismissOnClickOutside]);
 };
-
-export default useModalDismissSignal;

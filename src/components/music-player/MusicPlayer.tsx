@@ -1,13 +1,13 @@
 import { Paper } from "@mui/material";
 
-import Controls from "@/components/music-player/controls/Controls";
-import Cover from "@/components/music-player/cover/Cover";
-import ProgressBar from "@/components/music-player/progress-bar/ProgressBar";
-import VolumeBar from "@/components/music-player/volume-bar/VolumeBar";
+import { Controls } from "@/components/music-player/controls/Controls";
+import { Cover } from "@/components/music-player/cover/Cover";
+import { ProgressBar } from "@/components/music-player/progress-bar/ProgressBar";
+import { VolumeBar } from "@/components/music-player/volume-bar/VolumeBar";
 
 import "./MusicPlayer.scss";
 
-const MusicPlayer = () => {
+export const MusicPlayer = () => {
   return (
     <Paper elevation={3} className="music-player">
       <ProgressBar />
@@ -26,5 +26,3 @@ const MusicPlayer = () => {
     </Paper>
   );
 };
-
-export default MusicPlayer;

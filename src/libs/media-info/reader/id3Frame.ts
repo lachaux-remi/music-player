@@ -1,4 +1,4 @@
-import genres from "@/libs/media-info/reader/genres";
+import { genres } from "@/libs/media-info/reader/genres";
 import { getString, getStringUtf16, getUint24, getUint32Synch } from "@/libs/media-info/reader/util";
 
 export interface ID3Frame {

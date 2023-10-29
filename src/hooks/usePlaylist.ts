@@ -13,7 +13,7 @@ type usePlaylistReturn = {
   getPlaylist: (playlistUuid: string) => Playlist | undefined;
 };
 
-const usePlaylist = (): usePlaylistReturn => {
+export const usePlaylist = (): usePlaylistReturn => {
   const playlists = useSelector((state: RootState) => state.playlists);
   const tracks = useSelector((state: RootState) => state.tracks);
 
@@ -43,5 +43,3 @@ const usePlaylist = (): usePlaylistReturn => {
     getPlaylist
   };
 };
-
-export default usePlaylist;

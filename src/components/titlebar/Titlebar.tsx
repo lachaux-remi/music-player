@@ -2,7 +2,7 @@ import logo from "@/assets/logo.svg";
 
 import "./Titlebar.scss";
 
-const Titlebar = () => {
+export const Titlebar = () => {
   return (
     <div className="titlebar">
       <img src={logo} alt="music-player" />
@@ -10,5 +10,3 @@ const Titlebar = () => {
     </div>
   );
 };
-
-export default Titlebar;

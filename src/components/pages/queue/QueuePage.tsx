@@ -1,7 +1,5 @@
-import Page from "@/components/pages/Page";
+import { Page } from "@/components/pages/Page";
 
-const QueuePage = () => {
+export const QueuePage = () => {
   return <Page title="File d'attente de lecture">blah blah blah</Page>;
 };
-
-export default QueuePage;

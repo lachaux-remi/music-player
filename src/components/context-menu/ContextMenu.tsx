@@ -1,13 +1,13 @@
 import { Divider, ListItemIcon, ListItemText, MenuItem } from "@mui/material";
 
-import ContextSubMenu from "@/components/context-menu/ContextSubMenu";
+import { ContextSubMenu } from "@/components/context-menu/ContextSubMenu";
 import { ContextMenuItem } from "@/hooks/useContextMenu";
 
-type ContextMenuProps = {
+export type ContextMenuProps = {
   items: ContextMenuItem[];
 };
 
-const ContextMenu = (props: ContextMenuProps) => {
+export const ContextMenu = (props: ContextMenuProps) => {
   const { items } = props;
 
   return items.map((props, index) => {
@@ -29,5 +29,3 @@ const ContextMenu = (props: ContextMenuProps) => {
     );
   });
 };
-
-export default ContextMenu;

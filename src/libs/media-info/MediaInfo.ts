@@ -6,7 +6,7 @@ import { ID3Tag, parse } from "@/libs/media-info/reader/id3Tag";
  * @param {File} file File to parse
  * @return {Promise<ID3Tag>}
  */
-async function fromFile(file: File): Promise<Partial<ID3Tag>> {
+export const fromFile = async (file: File): Promise<Partial<ID3Tag>> => {
   const reader = new BrowserFileReader(file);
 
   await reader.open();
@@ -14,10 +14,4 @@ async function fromFile(file: File): Promise<Partial<ID3Tag>> {
   await reader.close();
 
   return tags;
-}
-
-const MediaInfo = {
-  fromFile
 };
-
-export default MediaInfo;

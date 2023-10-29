@@ -12,14 +12,14 @@ import { ReactElement } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { MediaState, RepeatMode, RootState } from "@/@types/State";
-import IconButtonBordered from "@/components/@extends/IconButtonBordered";
-import IconButtonToggle from "@/components/@extends/IconButtonToggle";
+import { IconButtonBordered } from "@/components/@extends/IconButtonBordered";
+import { IconButtonToggle } from "@/components/@extends/IconButtonToggle";
 import { playOrPause } from "@/stores/slices/playingReducer";
 import { switchRepeat, toggleShuffle } from "@/stores/slices/settingsReducer";
 
 import "./Controls.scss";
 
-const Controls = () => {
+export const Controls = () => {
   const dispatch = useDispatch();
   const status = useSelector((state: RootState) => state.playing);
   const { shuffle, repeat } = useSelector((state: RootState) => state.settings);
@@ -66,5 +66,3 @@ const Controls = () => {
     </div>
   );
 };
-
-export default Controls;

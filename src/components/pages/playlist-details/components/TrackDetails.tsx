@@ -10,13 +10,13 @@ import { removeTracks } from "@/stores/slices/playlistsReducer";
 import { addTracksToPlayNext, setTrack } from "@/stores/slices/queueReducer";
 import { formatTime } from "@/utils/TimeUtil";
 
-type TrackDetailsProps = {
+export type TrackDetailsProps = {
   track: Track;
   playlist: Playlist;
   selectedState: [Track[], React.Dispatch<React.SetStateAction<Track[]>>];
 };
 
-const TrackDetails = (props: TrackDetailsProps) => {
+export const TrackDetails = (props: TrackDetailsProps) => {
   const { track, playlist, selectedState } = props;
   const [selectedTrack, setSelectedTrack] = selectedState;
 
@@ -80,5 +80,3 @@ const TrackDetails = (props: TrackDetailsProps) => {
     </div>
   );
 };
-
-export default TrackDetails;

@@ -2,17 +2,17 @@ import { ArrowRight } from "@mui/icons-material";
 import { ListItemIcon, ListItemText, MenuItem, MenuList, Paper } from "@mui/material";
 import { ReactNode, useEffect, useRef, useState } from "react";
 
-import ContextMenu from "@/components/context-menu/ContextMenu";
+import { ContextMenu } from "@/components/context-menu/ContextMenu";
 import { ContextMenuItem } from "@/hooks/useContextMenu";
 
-type ContextSubMenuProps = {
+export type ContextSubMenuProps = {
   caption: ReactNode;
   icon?: ReactNode;
   inset?: boolean;
   items: ContextMenuItem[];
 };
 
-const ContextSubMenu = (props: ContextSubMenuProps) => {
+export const ContextSubMenu = (props: ContextSubMenuProps) => {
   const { caption, icon, inset = false, items } = props;
 
   const refParent = useRef<HTMLLIElement>(null);
@@ -71,5 +71,3 @@ const ContextSubMenu = (props: ContextSubMenuProps) => {
     </MenuItem>
   );
 };
-
-export default ContextSubMenu;

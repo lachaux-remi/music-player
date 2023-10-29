@@ -4,9 +4,9 @@ import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import thunk from "redux-thunk";
 
-import audioMiddleware from "@/stores/middlewares/audioMiddleware";
-import shufflerMiddleware from "@/stores/middlewares/shufflerMiddleware";
-import trackMiddleware from "@/stores/middlewares/trackMiddleware";
+import { audioMiddleware } from "@/stores/middlewares/audioMiddleware";
+import { shufflerMiddleware } from "@/stores/middlewares/shufflerMiddleware";
+import { trackMiddleware } from "@/stores/middlewares/trackMiddleware";
 import playingReducer from "@/stores/slices/playingReducer";
 import playlistsReducer from "@/stores/slices/playlistsReducer";
 import queueReducer from "@/stores/slices/queueReducer";

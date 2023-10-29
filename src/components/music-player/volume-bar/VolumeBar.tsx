@@ -7,7 +7,7 @@ import { setVolume } from "@/stores/slices/settingsReducer";
 
 import "./VolumeBar.scss";
 
-const VolumeBar = () => {
+export const VolumeBar = () => {
   const dispatch = useDispatch();
   const { volume } = useSelector((state: RootState) => state.settings);
 
@@ -47,5 +47,3 @@ const VolumeBar = () => {
     </div>
   );
 };
-
-export default VolumeBar;

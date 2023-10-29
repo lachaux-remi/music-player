@@ -4,7 +4,7 @@ import { RootState } from "@/@types/State";
 
 import "./Cover.scss";
 
-const Cover = () => {
+export const Cover = () => {
   const { currentTrack } = useSelector((state: RootState) => state.queue);
 
   if (!currentTrack) {
@@ -21,5 +21,3 @@ const Cover = () => {
     </div>
   );
 };
-
-export default Cover;
