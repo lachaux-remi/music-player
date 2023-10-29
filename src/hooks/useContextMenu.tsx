@@ -9,8 +9,8 @@ import {
   useState
 } from "react";
 
-import ContextFrame from "@/components/context-menu/ContextFrame";
-import ContextMenuContext, { ContextMenuContextType } from "@/contexts/ContextMenuContext";
+import { ContextFrame } from "@/components/context-menu/ContextFrame";
+import { ContextMenuContext, ContextMenuContextType } from "@/contexts/ContextMenuContext";
 
 export type ContextMenuItem = {
   caption: ReactNode;

@@ -2,21 +2,21 @@ import { MenuList, Paper } from "@mui/material";
 import { MouseEvent, useContext, useLayoutEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 
-import ContextMenu from "@/components/context-menu/ContextMenu";
-import ContextMenuContext from "@/contexts/ContextMenuContext";
+import { ContextMenu } from "@/components/context-menu/ContextMenu";
+import { ContextMenuContext } from "@/contexts/ContextMenuContext";
 import { ContextMenuItem } from "@/hooks/useContextMenu";
-import useModalDismissSignal from "@/hooks/useModalDismissSignal";
+import { useModalDismissSignal } from "@/hooks/useModalDismissSignal";
 
 import "./Context.scss";
 
-type ContextMenuProps = {
+export type ContextMenuProps = {
   items: ContextMenuItem[];
   clientX: number;
   clientY: number;
   hide: () => void;
 };
 
-const ContextFrame = (props: ContextMenuProps) => {
+export const ContextFrame = (props: ContextMenuProps) => {
   const { items, clientX, clientY, hide } = props;
 
   const { registerMenu } = useContext(ContextMenuContext);
@@ -27,7 +27,10 @@ const ContextFrame = (props: ContextMenuProps) => {
     registerMenu(ref.current!);
   }, [registerMenu]);
 
-  const offsetsRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
+  const offsetsRef = useRef<{
+    x: number;
+    y: number;
+  }>({ x: 0, y: 0 });
 
   useModalDismissSignal(ref, hide, true);
 
@@ -89,5 +92,3 @@ const ContextFrame = (props: ContextMenuProps) => {
     document.body
   );
 };
-
-export default ContextFrame;

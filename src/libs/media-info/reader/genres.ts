@@ -1,4 +1,4 @@
-const genres = [
+export const genres = [
   "Blues",
   "Classic Rock",
   "Country",
@@ -149,5 +149,3 @@ const genres = [
   "Synthpop",
   "Rock/Pop"
 ];
-
-export default genres;

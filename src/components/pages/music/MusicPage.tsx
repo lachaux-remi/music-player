@@ -12,19 +12,19 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { PageAction } from "@/@types/Page";
 import { RootState, Track } from "@/@types/State";
-import Page from "@/components/pages/Page";
-import Action from "@/components/pages/components/page-actions/Action";
-import TrackInfo from "@/components/pages/music/components/TrackInfo";
+import { Page } from "@/components/pages/Page";
+import { Action } from "@/components/pages/components/page-actions/Action";
+import { TrackInfo } from "@/components/pages/music/components/TrackInfo";
 import { useMassSelection } from "@/hooks/useMassSelection";
 import { usePlaylistNameDialog } from "@/hooks/usePlaylistNameDialog";
-import MediaInfo from "@/libs/media-info/MediaInfo";
+import { fromFile } from "@/libs/media-info/MediaInfo";
 import { add as addNewPlaylist, addTracks as addTracksToPlaylist } from "@/stores/slices/playlistsReducer";
 import { addTracks as addTracksToQueue, setTrack } from "@/stores/slices/queueReducer";
 import { add } from "@/stores/slices/tracksReducer";
 
 import "./MusicPage.scss";
 
-const MusicPage = () => {
+export const MusicPage = () => {
   const dispatch = useDispatch();
   const playlists = useSelector((state: RootState) => state.playlists);
   const tracks = useSelector((state: RootState) => state.tracks);
@@ -117,7 +117,7 @@ const MusicPage = () => {
     }
 
     for (const file of files) {
-      const tags = await MediaInfo.fromFile(file);
+      const tags = await fromFile(file);
       const uuid = md5(file.path);
       let cover = "";
       if (tags.image) {
@@ -162,5 +162,3 @@ const MusicPage = () => {
     </Page>
   );
 };
-
-export default MusicPage;

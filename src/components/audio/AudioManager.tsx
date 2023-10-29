@@ -8,7 +8,7 @@ import { audio } from "@/stores/middlewares/audioMiddleware";
 import { play, playOrPause, stop } from "@/stores/slices/playingReducer";
 import { nextTrack, previousTrack, setCurrentTime, setCurrentTrack } from "@/stores/slices/queueReducer";
 
-const AudioManager = () => {
+export const AudioManager = () => {
   const dispatch = useDispatch();
   const { currentTime, currentTrack, tracks } = useSelector((state: RootState) => state.queue);
   const { volume, repeat } = useSelector((state: RootState) => state.settings);
@@ -73,5 +73,3 @@ const AudioManager = () => {
 
   return null;
 };
-
-export default AudioManager;

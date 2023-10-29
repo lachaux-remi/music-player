@@ -1,9 +1,9 @@
 import { ButtonProps } from "@mui/material";
 import { ReactNode } from "react";
 
-import ResponsiveButton from "@/components/@extends/ResponsiveButton";
+import { ResponsiveButton } from "@/components/@extends/ResponsiveButton";
 
-type ActionProps = {
+export type ActionProps = {
   key: string | number;
   onClick?: () => void;
   variant?: ButtonProps["variant"];
@@ -12,7 +12,7 @@ type ActionProps = {
   children: ReactNode;
 };
 
-const Action = (props: ActionProps) => {
+export const Action = (props: ActionProps) => {
   const { onClick, variant, color, icon, children } = props;
   return (
     <ResponsiveButton
@@ -26,5 +26,3 @@ const Action = (props: ActionProps) => {
     </ResponsiveButton>
   );
 };
-
-export default Action;

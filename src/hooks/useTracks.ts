@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 
 import { RootState, Track } from "@/@types/State";
 
-const useTracks = () => {
+export const useTracks = () => {
   const tracks = useSelector((state: RootState) => state.tracks);
 
   const getTrack = (trackUUID?: string): Track | undefined => {
@@ -17,5 +17,3 @@ const useTracks = () => {
     getTrack
   };
 };
-
-export default useTracks;

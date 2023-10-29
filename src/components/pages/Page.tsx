@@ -1,19 +1,19 @@
 import { ReactNode } from "react";
 
 import { PageAction } from "@/@types/Page";
-import PageActions from "@/components/pages/components/page-actions/PageActions";
-import PageTitle from "@/components/pages/components/page-title/PageTitle";
+import { PageActions } from "@/components/pages/components/page-actions/PageActions";
+import { PageTitle } from "@/components/pages/components/page-title/PageTitle";
 
 import "./Main.scss";
 
-type MainProps = {
+export type MainProps = {
   title: string;
   className?: string;
   actions?: PageAction[];
   children: ReactNode;
 };
 
-const Page = (props: MainProps) => {
+export const Page = (props: MainProps) => {
   const { title, className, actions = [], children } = props;
 
   return (
@@ -26,5 +26,3 @@ const Page = (props: MainProps) => {
     </div>
   );
 };
-
-export default Page;

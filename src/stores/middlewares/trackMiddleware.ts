@@ -4,7 +4,7 @@ import { RootState, Track } from "@/@types/State";
 import { removeTracks as removeTracksInPlaylist } from "@/stores/slices/playlistsReducer";
 import { nextTrack, removeTracks as removeTracksInQueue } from "@/stores/slices/queueReducer";
 
-const trackMiddleware: Middleware = store => next => action => {
+export const trackMiddleware: Middleware = store => next => action => {
   const state: RootState = store.getState();
 
   switch (action.type) {
@@ -31,5 +31,3 @@ const trackMiddleware: Middleware = store => next => action => {
 
   return next(action);
 };
-
-export default trackMiddleware;

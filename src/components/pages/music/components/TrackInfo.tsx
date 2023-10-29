@@ -17,12 +17,12 @@ import { add, addTracks as addTracksToPlaylist } from "@/stores/slices/playlists
 import { addTracksToPlayNext, addTracks as addTracksToQueue, setTrack } from "@/stores/slices/queueReducer";
 import { remove } from "@/stores/slices/tracksReducer";
 
-type TrackInfoProps = {
+export type TrackInfoProps = {
   track: Track;
   selectedState: [Track[], React.Dispatch<React.SetStateAction<Track[]>>];
 };
 
-const TrackInfo = (props: TrackInfoProps) => {
+export const TrackInfo = (props: TrackInfoProps) => {
   const { selectedState, track } = props;
   const [selectedTrack, setSelectedTrack] = selectedState;
 
@@ -126,5 +126,3 @@ const TrackInfo = (props: TrackInfoProps) => {
     </ButtonBase>
   );
 };
-
-export default TrackInfo;

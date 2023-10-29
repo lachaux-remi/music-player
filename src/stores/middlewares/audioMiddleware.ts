@@ -5,7 +5,7 @@ import { play } from "@/stores/slices/playingReducer";
 
 export const audio = new Audio();
 
-const audioMiddleware: Middleware = store => next => async action => {
+export const audioMiddleware: Middleware = store => next => async action => {
   const state: RootState = store.getState();
 
   switch (action.type) {
@@ -63,5 +63,3 @@ const audioMiddleware: Middleware = store => next => async action => {
 
   return next(action);
 };
-
-export default audioMiddleware;

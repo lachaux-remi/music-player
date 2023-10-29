@@ -7,7 +7,7 @@ import { formatTime } from "@/utils/TimeUtil";
 
 import "./ProgressBar.scss";
 
-const ProgressBar = () => {
+export const ProgressBar = () => {
   const dispatch = useDispatch();
   const { currentTrack, currentTime } = useSelector((state: RootState) => state.queue);
 
@@ -32,5 +32,3 @@ const ProgressBar = () => {
     </div>
   );
 };
-
-export default ProgressBar;

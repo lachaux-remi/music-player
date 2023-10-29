@@ -2,7 +2,7 @@
   "name": "music-player",
   "productName": "Lecteur de musique",
   "description": "Lecteur de musique permettant de récupérer la musique en cours de lecture dans une page web, utile pour les lives sur Twitch.",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "dist-electron/main/index.js",
   "scripts": {
     "dev": "vite",

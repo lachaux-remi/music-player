@@ -2,7 +2,7 @@ import { MenuItem, Tooltip } from "@mui/material";
 import { ForwardRefExoticComponent, MouseEvent, ReactElement } from "react";
 import { Link, LinkProps, To, useLocation } from "react-router-dom";
 
-type SidebarItemProps = {
+export type SidebarItemProps = {
   children: ReactElement;
   title: string;
   disabled?: boolean;
@@ -10,12 +10,12 @@ type SidebarItemProps = {
   to?: To;
 };
 
-type SidebarItemCalculatedProps =
+export type SidebarItemCalculatedProps =
   | { onClick: (event: MouseEvent) => void }
   | { component: ForwardRefExoticComponent<LinkProps>; to: To }
   | object;
 
-const SidebarItem = (props: SidebarItemProps) => {
+export const SidebarItem = (props: SidebarItemProps) => {
   const { children, title, disabled = false, onclick, to } = props;
 
   const { pathname } = useLocation();
@@ -44,5 +44,3 @@ const SidebarItem = (props: SidebarItemProps) => {
     </Tooltip>
   );
 };
-
-export default SidebarItem;

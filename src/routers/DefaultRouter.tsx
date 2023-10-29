@@ -1,14 +1,14 @@
 import { HashRouter, Route, Routes } from "react-router-dom";
 
-import DefaultLayout from "@/components/layouts/DefaultLayout";
-import MusicPage from "@/components/pages/music/MusicPage";
-import PlaylistDetailsPage from "@/components/pages/playlist-details/PlaylistDetailsPage";
-import PlaylistsPage from "@/components/pages/playlists/PlaylistsPage";
-import QueuePage from "@/components/pages/queue/QueuePage";
-import RenderingPage from "@/components/pages/rendering/RenderingPage";
-import SettingsPage from "@/components/pages/settings/SettingsPage";
+import { DefaultLayout } from "@/components/layouts/DefaultLayout";
+import { MusicPage } from "@/components/pages/music/MusicPage";
+import { PlaylistDetailsPage } from "@/components/pages/playlist-details/PlaylistDetailsPage";
+import { PlaylistsPage } from "@/components/pages/playlists/PlaylistsPage";
+import { QueuePage } from "@/components/pages/queue/QueuePage";
+import { RenderingPage } from "@/components/pages/rendering/RenderingPage";
+import { SettingsPage } from "@/components/pages/settings/SettingsPage";
 
-const DefaultRouter = () => {
+export const DefaultRouter = () => {
   return (
     <HashRouter>
       <Routes>
@@ -26,5 +26,3 @@ const DefaultRouter = () => {
     </HashRouter>
   );
 };
-
-export default DefaultRouter;

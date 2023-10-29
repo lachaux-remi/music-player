@@ -9,11 +9,11 @@ import {
 import { Divider, MenuList, Paper } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import SidebarItem from "@/components/sidebar/components/SidebarItem";
+import { SidebarItem } from "@/components/sidebar/components/SidebarItem";
 
 import "./Sidebar.scss";
 
-const Sidebar = () => {
+export const Sidebar = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -45,5 +45,3 @@ const Sidebar = () => {
     </Paper>
   );
 };
-
-export default Sidebar;

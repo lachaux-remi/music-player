@@ -5,7 +5,7 @@ import { MassActionItem, MassActionItemProps } from "@/components/mass-actions/m
 
 import "./MassActions.scss";
 
-type MassActionsProps<T> = {
+export type MassActionsProps<T> = {
   items: T[];
   selectedItems: T[];
   setSelectedItems: Dispatch<SetStateAction<T[]>>;

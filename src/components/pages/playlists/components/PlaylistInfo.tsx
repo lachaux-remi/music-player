@@ -12,15 +12,15 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
 import { useContextMenu } from "@/hooks/useContextMenu";
-import usePlaylist from "@/hooks/usePlaylist";
+import { usePlaylist } from "@/hooks/usePlaylist";
 import { usePlaylistNameDialog } from "@/hooks/usePlaylistNameDialog";
 import { remove, rename } from "@/stores/slices/playlistsReducer";
 
-type PlaylistInfoProps = {
+export type PlaylistInfoProps = {
   playlistUUID: string;
 };
 
-const PlaylistInfo = (props: PlaylistInfoProps) => {
+export const PlaylistInfo = (props: PlaylistInfoProps) => {
   const { playlistUUID } = props;
 
   const dispatch = useDispatch();
@@ -94,5 +94,3 @@ const PlaylistInfo = (props: PlaylistInfoProps) => {
     </ButtonBase>
   );
 };
-
-export default PlaylistInfo;

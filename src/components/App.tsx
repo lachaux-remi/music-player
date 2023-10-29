@@ -3,13 +3,13 @@ import { useMemo } from "react";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 
-import AudioManager from "@/components/audio/AudioManager";
-import DefaultRouter from "@/routers/DefaultRouter";
+import { AudioManager } from "@/components/audio/AudioManager";
+import { DefaultRouter } from "@/routers/DefaultRouter";
 import { persistor, store } from "@/stores/store";
 
 import "./App.scss";
 
-const App = () => {
+export const App = () => {
   const useDarkColors = useMediaQuery("(prefers-color-scheme: dark)");
   const theme = useMemo(() => {
     return createTheme({
@@ -54,5 +54,3 @@ const App = () => {
     </Provider>
   );
 };
-
-export default App;

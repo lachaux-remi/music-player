@@ -5,19 +5,19 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import { PageAction } from "@/@types/Page";
 import { Track } from "@/@types/State";
-import Page from "@/components/pages/Page";
-import Action from "@/components/pages/components/page-actions/Action";
-import NotFoundPage from "@/components/pages/errors/NotFoundPage";
-import TrackDetails from "@/components/pages/playlist-details/components/TrackDetails";
+import { Page } from "@/components/pages/Page";
+import { Action } from "@/components/pages/components/page-actions/Action";
+import { NotFoundPage } from "@/components/pages/errors/NotFoundPage";
+import { TrackDetails } from "@/components/pages/playlist-details/components/TrackDetails";
 import { useMassSelection } from "@/hooks/useMassSelection";
-import usePlaylist from "@/hooks/usePlaylist";
+import { usePlaylist } from "@/hooks/usePlaylist";
 import { usePlaylistNameDialog } from "@/hooks/usePlaylistNameDialog";
 import { remove as removePlaylist, removeTracks, rename } from "@/stores/slices/playlistsReducer";
 import { addTracks as addTracksToQueue, setTrack } from "@/stores/slices/queueReducer";
 
 import "./PlaylistDetailsPage.scss";
 
-const PlaylistDetailsPage = () => {
+export const PlaylistDetailsPage = () => {
   const { playlistUUID } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -106,5 +106,3 @@ const PlaylistDetailsPage = () => {
     </Page>
   );
 };
-
-export default PlaylistDetailsPage;

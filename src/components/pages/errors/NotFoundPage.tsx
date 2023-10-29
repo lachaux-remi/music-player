@@ -1,14 +1,14 @@
 import { ReactNode } from "react";
 
-import Page from "@/components/pages/Page";
+import { Page } from "@/components/pages/Page";
 
 import "./ErrorsPage.scss";
 
-type NotFoundProps = {
+export type NotFoundProps = {
   children: ReactNode;
 };
 
-const NotFoundPage = (props: NotFoundProps) => {
+export const NotFoundPage = (props: NotFoundProps) => {
   const { children } = props;
 
   return (
@@ -17,5 +17,3 @@ const NotFoundPage = (props: NotFoundProps) => {
     </Page>
   );
 };
-
-export default NotFoundPage;
